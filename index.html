@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Continuous Security in DevOps</title>
+
+		<meta name="author" content="Julien Vehent">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+                    <h1>Continuous Security</h1>
+                    <h2>in the DevOps world</h2>
+                    <br /><br />
+                    <h3>Julien Vehent<br />Mozilla Security</h3>
+                </section>
+
+                <section>
+                    <h2>$whoami</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Firefox Services Security Lead</li>
+                                    <li>Infrastructure defense &amp; incident response</li>
+                                    <li>sec tools coder: MIG, sops, TLS Observatory, ...</li>
+                                    <li>50% ops, 50% dev, 50% security</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <img src="statics/dd4bde85e24e80c1e229ea190196687f.jpeg" width="500px"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <p><b><span style="color: blue;">@jvehent</span></b> on twitter</p>
+                </section>
+
+                <section>
+                    <h2>Speed matters</h2>
+                    <p>Traditional ops where deployments take entire weeks<br />aren't acceptable anymore.</p>
+                    <p>To compete, startups need fast release cycles.</p>
+                    <br />
+                    <p><span style="color: red;">15min from patch to prod</span> is the new standard!</p>
+                </section>
+
+                <section>
+                    <h2>Doing things fast means taking risks</h2>
+                    <p>Your typical cross-team interaction goes like this:</p>
+                    <ul>
+                        <li>Product: "feat. X should have gone live A WEEK AGO!"</li>
+                        <li>Security: "it's insecure, we need time to review and test."</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Security<br />must be part of the Product</h2>
+                    <ul>
+                        <li>Be a member of the DevOps team</li>
+                        <li>Understand the roadmap</li>
+                        <li>Share the successes</li>
+                        <li>Share the failures</li>
+                        <li>Write code that makes things better</li>
+                    </ul>
+                </section>
+
+
+                <section>
+                    <h2>DevOps: Dev+Ops</h2>
+                    <p>At a technical level, DevOps is about using development techniques in operations.</p>
+                    <p>At a human level, it's about easier communication between devs and ops.</p>
+                    <br />
+                    <p>Sec teams needs 
+                </section>
+
+                <section>
+                    <h2>title</h2>
+                </section>
+
+                <section>
+                    <h2>title</h2>
+                </section>
+
+                <section>
+                    <h2>title</h2>
+                </section>
+
+                <section>
+                    <h2>title</h2>
+                </section>
+
+                <section>
+                    <h2>title</h2>
+                </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+            Reveal.configure({
+                slideNumber: true,
+                slideNumber: 'c/t',
+
+            });
+		</script>
+	</body>
+</html>
