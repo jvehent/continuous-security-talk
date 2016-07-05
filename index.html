@@ -263,11 +263,6 @@ WARN: Web Browser XSS Protection Not Enabled [10016] x 3
 
                 <section>
                     <h2>Then we deploy</h2>
-                    <ul> 
-                        <li>Docker container deployed by Jenkins and Ansible/Cloudformation to AWS</li>
-                        <li>The ops own that piece. They make the provisioning magic happen</li>
-                        <li>Security job is to help them harden the infra</li>
-                    </ul>
                 </section>
 
                 <section>
@@ -280,8 +275,8 @@ WARN: Web Browser XSS Protection Not Enabled [10016] x 3
                     <h2>Max has to write all the provisioning code</h2>
                     <ul>
                         <li>Build the AWS infra via cloudformation</li>
-                        <li>Setup the jenkins pipeline for continuous deployment</li>
-                        <li>Often help the devs make architecture decisions</li>
+                        <li>Setup the jenkins pipeline to for continuous deployment (Docker container deployed to EC2 instances with Jenkins, Ansible, Cloudformation and Puppet).</li>
+                        <li>He often helps the devs make architecture decisions, like how to use CDNs, caching, etc...</li>
                     </ul>
                 </section>
 
@@ -292,10 +287,10 @@ WARN: Web Browser XSS Protection Not Enabled [10016] x 3
                 <section>
                     <h2>We help Max with tools...</h2>
                     <ul>
-                        <li>Managing secrets (SOPS) to prevent leaks</li>
-                        <li>Configuring good TLS on endpoints (TLS Observatory)</li>
-                        <li>Disable users that have left the company (Userplex)</li>
-                        <li>Build crypto services so services don't have to manage keys (Autograph)</li>
+                        <li>Managing secrets (<a href="https://github.com/mozilla/sops">SOPS</a>) to prevent leaks</li>
+                        <li>Configuring good TLS on endpoints (<a href="https://github.com/mozilla/tls-observatory">TLS Observatory</a>)</li>
+                        <li>Disabling users that have left the company (<a href="https://github.com/mozilla-services/userplex">Userplex</a>)</li>
+                        <li>Building crypto services so services don't have to manage keys (<a href="https://github.com/mozilla-services/autograph">Autograph</a>)</li>
                     </ul>
                     <h2>and Guidelines</h2>
                     <ul>
@@ -306,12 +301,12 @@ WARN: Web Browser XSS Protection Not Enabled [10016] x 3
                 </section>
 
                 <section>
-                    <h2>Sec team builds solutions that helps DevOps</h2>
+                    <h2>Sec team builds solutions<br />to help DevOps</h2>
                     <ol>
                         <li>Dev or Ops come see us with a problem</li>
                         <li>We discuss it together</li>
                         <li>Sec or Dev team builds a solution that solve the issue</li>
-                        <li>We generalize the solution so other teams can benefit as well</li>
+                        <li>We generalize it so other teams can benefit as well</li>
                     </ol>
                 </section>
 
@@ -333,7 +328,7 @@ app2:
                     <h2>Test Driven Security for the infrastructure</h2>
                     <ul>
                         <li>Test the TLS configuration daily (certificate, ciphersuites, ...)</li>
-                        <li>[future] Test the security groups (firewalls) with mozilla/build-fwunit</li>
+                        <li>[future] Test security groups with <a href="https://github.com/mozilla/build-fwunit">mozilla/build-fwunit</a></li>
                         <li>[future] Test AWS IAM policies</li>
                     </ul>
                 </section>
@@ -362,12 +357,12 @@ $ tlsobs addons.mozilla.org
                 </section>
 
                 <section>
-                    <h2>It's launch day!</h2>
+                    <h2>It's launch day! Foxes Everywhere!</h2>
                     <img src="statics/launch_day.png" />
                 </section>
 
                 <section>
-                    <h2>Until bad guys decide to mess with us</h2>
+                    <h2>Until bad guys start attacking CuteFox</h2>
                     <img src="statics/hell.jpg" />
                 </section>
 
