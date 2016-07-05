@@ -108,16 +108,279 @@
                 </section>
 
                 <section>
-                    <h2>title</h2>
+                    <img src="statics/deploy.png" style="border:0;" />
+                </section>
+
+                <section>
+                    <h2>In an ideal world, all deploys are automated and instantaneous</h2>
+                    <p>in the real world, we're not quite there yet, but you get the point</p>
+                </section>
+
+                <section>
+                    <h2>Security versus DevOps</h2>
+                    <h3>aka. <em>The Wrong way</em></h3>
+                    <ul>
+                        <li>DevOps team optimizes for fast iterations</li>
+                        <li>Security team optimizes for fewer incidents</li>
+                    </ul>
+                    <p>Both sides typically work against each other, actively arming both the roadmap and security of the product</p>
+                </section>
+
+                <section>
+                    <h2>Security <b>into</b> DevOps</h2>
+                    <ol>
+                        <li>Test Driven Security (TDS) integrated into the delivery pipeline. Use security tests to gradual improve application &amp; infrastructure security.</li>
+                        <li>Monitoring &amp; blocking attacks, via fraud detection techniques and incident response.</li>
+                        <li>Managing risks throughout the life-cycle of the service.</li>
+                    </ol>
                 </section>
 
 
                 <section>
-                    <h2>Doing things fast means taking risks</h2>
-                    <p>Your typical cross-team interaction goes like this:</p>
+                    <h2>Continuous Security at Mozilla</h2>
+                    <p>Walkthrough through the life-cycle of a project, from inception to retirement</p>
+                </section>
+
+                <section>
+                    <h2>Sam is building a new service</h2>
+                    <img src="statics/sam_happy.svg" style="border:0;" width="20%"/>
+                    <p>CuteFox: a REST API that sends webpush notifications to Firefox users with photos of cute foxes.</p>
+                </section>
+
+                <section>
+                    <img src="statics/6861697-baby-fox-wallpaper.jpg"/>
+                </section>
+
+                <section>
+                    <h2>When the project starts,<br />we talk risk together</h2>
+                    <h3>RRA: Rapid Risk Assessment</h3>
+                    <p>A ~30min <b>friendly</b> discussion between the devs, ops, products managers and security team to go over the business risks of the project</p>
+                </section>
+
+                <section>
+                    <h2>done remotely!</h2>
+                    <img src="statics/vidyo.png" />
+                </section>
+
+                <section>
+                    <img src="statics/RRA.png" width="200%" />
+                    <p>A risk summary table from the RRA</p>
+                </section>
+
+                <section>
+                    <h2>RRA outputs recommendations</h2>
+                    <p>We capture those recommendation into a "Risk Summary" bug. The bug stays open for the lifetime of the service and serves as a tracker for security discussions related to the project</p>
+                </section>
+
+                <section>
+                    <h2>The project team understands the risks their project is exposed to.</h2>
+                </section>
+
+
+                <section>
+                    <h2>Sam goes coding and pushes code into CheerWeel's repo</h2>
+                    <img src="statics/sam.svg" style="border:0;" width="20%"/>
+                </section>
+
+                <section>
+                    <h2>Next, we help Sam avoid<br />common webapp vulnerabilities</h2>
                     <ul>
-                        <li>Product: "feat. X should have gone live A WEEK AGO!"</li>
-                        <li>Security: "it's insecure, we need time to review and test."</li>
+                        <li>Mozilla Web Security Guidelines<br /><a href="https://wiki.mozilla.org/Security/Guidelines/Web_Security">wiki.mozilla.org/Security/Guidelines/Web_Security</a></li> 
+                        <li>OWASP ZAP Scanning<br /><a href="https://github.com/zaproxy/zaproxy/wiki/ZAP-Baseline-Scan">github.com/zaproxy/ZAP-Baseline-Scan</a></li>
+                        <li>Require baseline security on all websites (CSP, Secure Cookies, TLS Only, ...)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Test Driven Security for web applications</h2>
+                    <img src="statics/zap_ci.png" style="border:0;"/>
+                </section>
+
+                <section>
+                    <h2>ZAP example in CircleCI</h2>
+                    <pre><code data-trim data-noescape>
+test:
+  override:
+    - docker run mozilla/cheerwell &
+
+    # pull down the ZAP docker container
+    - docker pull owasp/zap2docker-weekly
+
+    # Run ZAP against the application
+    - >
+        docker run -t owasp/zap2docker-weekly zap-baseline.py 
+        -t http://172.17.0.2:8080/
+
+    # Shut down the application container
+    - >
+        docker kill 
+        $(docker ps |grep mozilla/cheerwell 
+        | awk '{print $1}')
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Pass/Fail output, like unit tests</h2>
+                    <pre><code data-trim data-noescape>
+PASS: Absence of Anti-CSRF Tokens [40014]
+
+WARN: Web Browser XSS Protection Not Enabled [10016] x 3
+    http://172.17.0.2:8080/
+    http://172.17.0.2:8080//robots.txt
+    http://172.17.0.2:8080//sitemap.xml
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Test Driven Security</h2>
+                    <p>Similar to TDD: Write the security tests first, let them fail, implement the security control then verify the tests pass</p>
+                    <ul>
+                        <li>Security team writes the tests</li>
+                        <li>Developers implement the controls</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>We also ask Sam to<br />keep her app up to date</h2>
+                    <ul>
+                        <li>Node.JS: NSP, Greenkeeper.io</li>
+                        <li>Python: requires.io, pip --outdated</li>
+                        <li>Go: govend</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>TDS for dependency management</h2>
+                    <img src="statics/requires.io.png" />
+                </section>
+
+                <section>
+                    <h2>Developers own the operational security of their application</h2>
+                    <p>We don't bolt it on top with WAFs and so on, we build security into the app directly</p>
+                </section>
+
+                <section>
+                    <h2>Then we deploy</h2>
+                    <ul> 
+                        <li>Docker container deployed by Jenkins and Ansible/Cloudformation to AWS</li>
+                        <li>The ops own that piece. They make the provisioning magic happen</li>
+                        <li>Security job is to help them harden the infra</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Meet Max</h2>
+                    <img src="statics/max.svg" width="20%"/>
+                    <p>He's the Ops guy</p>
+                </section>
+
+                <section>
+                    <h2>Max has to write all the provisioning code</h2>
+                    <ul>
+                        <li>Build the AWS infra via cloudformation</li>
+                        <li>Setup the jenkins pipeline for continuous deployment</li>
+                        <li>Often help the devs make architecture decisions</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="statics/onedoesnotsimply.jpg" />
+                </section>
+
+                <section>
+                    <h2>We help Max with tools...</h2>
+                    <ul>
+                        <li>Managing secrets (SOPS) to prevent leaks</li>
+                        <li>Configuring good TLS on endpoints (TLS Observatory)</li>
+                        <li>Disable users that have left the company (Userplex)</li>
+                        <li>Build crypto services so services don't have to manage keys (Autograph)</li>
+                    </ul>
+                    <h2>and Guidelines</h2>
+                    <ul>
+                        <li>Require that admin panel must be placed behind VPN</li>
+                        <li>Perform audits and incident response training with the teams</li>
+                    </ul>
+                    <p>etc...</p>
+                </section>
+
+                <section>
+                    <h2>Sec team builds solutions that helps DevOps</h2>
+                    <ol>
+                        <li>Dev or Ops come see us with a problem</li>
+                        <li>We discuss it together</li>
+                        <li>Sec or Dev team builds a solution that solve the issue</li>
+                        <li>We generalize the solution so other teams can benefit as well</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Example: storing secrets in git</h2>
+                    <p>Problem: secrets in cleartext files have a bad tendency to leak</p>
+                    <p>Solution: SOPS - encrypt all credentials, decrypt at provisioning</p>
+                    <pre><code data-trim data-noescape>
+# The secrets below are unreadable without access to one of the sops master key
+myapp1: ENC[AES256_GCM,data:QsGJGjvQOpoVCIlrYTcOQEfQzriw,iv:ShmgdRNV6UrOJ22Rgr7habB74Nd/YFxU4lDh6jy6n+8=,tag:8GT6U8lzrI27DcFc1+icgQ==,type:str]
+app2:
+    db:
+        user: ENC[AES256_GCM,data:Arbb,iv:7bjm4ZaVFlxNk3O4M1P67TqfFtXTOHOe5x9rjF6/R9o=,tag:d4+O8BUj+02qaeJorev2ww==,type:str]
+        password: ENC[AES256_GCM,data:9/jSxNCq0A==,iv:5mk+GS016hKGj6gVfQDMSyuuPy7/SVHLsqQXK3p1nds=,tag:AtK4nPFoSOOgdw6IZmiZmw==,type:str]
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Test Driven Security for the infrastructure</h2>
+                    <ul>
+                        <li>Test the TLS configuration daily (certificate, ciphersuites, ...)</li>
+                        <li>[future] Test the security groups (firewalls) with mozilla/build-fwunit</li>
+                        <li>[future] Test AWS IAM policies</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Example: Testing TLS configuration</h2>
+                    <pre><code data-trim data-noescape>
+$ tlsobs addons.mozilla.org
+
+[...]
+
+--- Analyzers ---
+* Mozilla evaluation: intermediate
+  - for modern level: remove ciphersuites ECDHE-RSA-AES128-SHA, ECDHE-RSA-AES256-SHA, AES128-GCM-SHA256, AES128-SHA256, AES128-SHA, AES256-GCM-SHA384, AES256-SHA256, AES256-SHA, DES-CBC3-SHA
+  - for modern level: consider adding ciphers ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-ECDSA-CHACHA20-POLY1305, ECDHE-RSA-CHACHA20-POLY1305, ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES256-SHA384, ECDHE-ECDSA-AES128-SHA256
+  - for modern level: remove protocols TLSv1, TLSv1.1
+  - for modern level: consider enabling OCSP stapling
+  - for modern level: use a certificate of type ecdsa, not RSA
+  - oldest clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>When TLS config test fails, we direct ops to the config generator</h2>
+                    <img src="statics/tls-config-gen.png" />
+                </section>
+
+                <section>
+                    <h2>It's launch day!</h2>
+                    <img src="statics/launch_day.png" />
+                </section>
+
+                <section>
+                    <h2>Until bad guys decide to mess with us</h2>
+                    <img src="statics/hell.jpg" />
+                </section>
+
+                <section>
+                    <h2>Incident Response</h2>
+                    <h3>No one in the DevOps team sleeps until the fire is out</h3>
+                    <img src="statics/fireman.jpg" />
+                </section>
+
+                <section>
+                    <h2>Incidents suck</h2>
+                    <p>but they are great for</p>
+                    <ul>
+                        <li>Team building. Nothing like going through hell to trust each other.</li>
+                        <li>Roadmaps. Incidents <b>always</b> bump up the priority of security features.</li>
                     </ul>
                 </section>
 
@@ -130,35 +393,7 @@
                         <li>Share the failures</li>
                         <li>Write code that makes things better</li>
                     </ul>
-                </section>
-
-
-                <section>
-                    <h2>DevOps: Dev+Ops</h2>
-                    <p>At a technical level, DevOps is about using development techniques in operations.</p>
-                    <p>At a human level, it's about easier communication between devs and ops.</p>
-                    <br />
-                    <p>Sec teams needs 
-                </section>
-
-                <section>
-                    <h2>title</h2>
-                </section>
-
-                <section>
-                    <h2>title</h2>
-                </section>
-
-                <section>
-                    <h2>title</h2>
-                </section>
-
-                <section>
-                    <h2>title</h2>
-                </section>
-
-                <section>
-                    <h2>title</h2>
+                    <p>It's not Sec+DevOps, it's just DevOps.<br />Security is a natural component of it.</p>
                 </section>
 
 			</div>
