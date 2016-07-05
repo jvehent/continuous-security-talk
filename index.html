@@ -32,6 +32,8 @@
                     <h2>in the DevOps world</h2>
                     <br /><br />
                     <h3>Julien Vehent<br />Mozilla Security</h3>
+                    <br /><br />
+                    <p style="font-size:0.5em;">tip: navigate with left/right arrows</p>
                 </section>
 
                 <section>
@@ -67,7 +69,7 @@
                 <section>
                     <h2>Meet Samantha</h2>
                     <img src="statics/sam.svg" style="border:0;" width="20%"/>
-                    <p>She's a Node.js developer</p>
+                    <p>She's a Full Stack developer</p>
                 </section>
 
                 <section>
@@ -178,12 +180,12 @@
 
 
                 <section>
-                    <h2>Sam goes coding and pushes code into CheerWeel's repo</h2>
+                    <h2>Sam goes coding</h2>
                     <img src="statics/sam.svg" style="border:0;" width="20%"/>
                 </section>
 
                 <section>
-                    <h2>Next, we help Sam avoid<br />common webapp vulnerabilities</h2>
+                    <h2>We help Sam avoid<br />common webapp vulnerabilities</h2>
                     <ul>
                         <li>Mozilla Web Security Guidelines<br /><a href="https://wiki.mozilla.org/Security/Guidelines/Web_Security">wiki.mozilla.org/Security/Guidelines/Web_Security</a></li> 
                         <li>OWASP ZAP Scanning<br /><a href="https://github.com/zaproxy/zaproxy/wiki/ZAP-Baseline-Scan">github.com/zaproxy/ZAP-Baseline-Scan</a></li>
@@ -201,7 +203,7 @@
                     <pre><code data-trim data-noescape>
 test:
   override:
-    - docker run mozilla/cheerwell &
+    - docker run mozilla/cutefox &
 
     # pull down the ZAP docker container
     - docker pull owasp/zap2docker-weekly
@@ -214,7 +216,7 @@ test:
     # Shut down the application container
     - >
         docker kill 
-        $(docker ps |grep mozilla/cheerwell 
+        $(docker ps |grep mozilla/cutefox 
         | awk '{print $1}')
                     </code></pre>
                 </section>
@@ -379,13 +381,30 @@ $ tlsobs addons.mozilla.org
                     <h2>Incidents suck</h2>
                     <p>but they are great for</p>
                     <ul>
-                        <li>Team building. Nothing like going through hell to trust each other.</li>
-                        <li>Roadmaps. Incidents <b>always</b> bump up the priority of security features.</li>
+                        <li>Team building: Nothing like going through hell together to build trust!</li>
+                        <li>Roadmaps: Incidents <b>always</b> bump up the priority of security features.</li>
+                        <li>Security maturity: no amount of testing compares to an incident to evaluate the reliability of a service.</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h2>Security<br />must be part of the Product</h2>
+                    <h2>Continuous Security is a cycle</h2>
+                    <ol>
+                        <li>design new feature</li>
+                        <li>assess risks</li>
+                        <li>implement feature</li>
+                        <li>test security</li>
+                        <li>deploy</li>
+                        <li>get attacked</li>
+                        <li>fight back</li>
+                        <li>learn</li>
+                        <li>rinse and repeat</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Security must be part of the Product</h2>
+                    <p>Not an afterthought built on top</h3>
                     <ul>
                         <li>Be a member of the DevOps team</li>
                         <li>Understand the roadmap</li>
@@ -393,7 +412,13 @@ $ tlsobs addons.mozilla.org
                         <li>Share the failures</li>
                         <li>Write code that makes things better</li>
                     </ul>
-                    <p>It's not Sec+DevOps, it's just DevOps.<br />Security is a natural component of it.</p>
+                    <p>It's not SecDevOps, it's just DevOps.<br />Security is a natural component of it.</p>
+                </section>
+
+                <section>
+                    <h2>Thank You</h2>
+                    <img src="statics/firefox.png" width="50%" style="border:0;"/>
+                    <p>jvehent.github.io/continuous-security-talk</p>
                 </section>
 
 			</div>
